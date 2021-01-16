@@ -5,7 +5,10 @@ const weather={
 	apiKey:'bab77ee8a0252977cc8d8947e552f824',
 	fetchWeather:(city)=>{
 		fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weather.apiKey}`)
-		.then(resp=>resp.json())
+		.then(resp=>{
+			if(resp.status === 404) alert("Try Again")
+			return resp.json()
+		})
 		.then(data=>weather.dispalyWeather(data))
 		.catch(err=>console.log(err))
 	},
